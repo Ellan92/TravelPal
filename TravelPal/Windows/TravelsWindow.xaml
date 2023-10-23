@@ -1,0 +1,125 @@
+﻿<Window x:Class="TravelPal.Windows.TravelsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TravelPal.Windows"
+        mc:Ignorable="d"
+        Title="TravelsWindow" Height="450" Width="600" Background="MediumSlateBlue">
+    <Grid>
+        <Grid.Background>
+            <RadialGradientBrush>
+                <GradientStop Color="MintCream"/>
+                <GradientStop Color="MediumSlateBlue" Offset="1.1"/>
+            </RadialGradientBrush>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+
+        <Label
+            Content="Travels Window"
+            Grid.Column="1"
+            Grid.Row="1"
+            Grid.ColumnSpan="3"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            FontFamily="Arial"
+            FontSize="40"
+            Foreground="MintCream"/>
+        <Label
+            Content="User"
+            Grid.Column="1"
+            Grid.Row="1"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            FontFamily="Arial"
+            FontSize="18"
+            Foreground="MintCream"
+            Margin="10 0 0 0"/>
+        <Label
+            Grid.Row="2"
+            Grid.Column="1"
+            Content="Travels"
+            VerticalAlignment="Bottom"
+            Margin="37 0"
+            FontFamily="Arial"
+            FontSize="20"
+            Foreground="MintCream"/>
+
+        <ListView
+            Grid.Column="1"
+            Grid.Row="3"
+            Grid.ColumnSpan="3"
+            Grid.RowSpan="3"
+            Margin="40 0"/>
+
+        <Button
+            Grid.Row="1"
+            Grid.Column="1"
+            Height="30"
+            Width="80"
+            VerticalAlignment="Bottom"
+            HorizontalAlignment="Left"
+            Background="MintCream"
+            Content="Sign out"
+            FontSize="16"/>
+        <Button
+            Content="Info"
+            FontFamily="Arial"
+            FontSize="20"
+            Grid.Column="3"
+            Grid.Row="1"
+            Grid.ColumnSpan="2"
+            Width="120"
+            Margin="20"
+            Background="Transparent"
+            Foreground="MintCream"
+            BorderBrush="Transparent"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Right"/>
+        <Button
+            Grid.Row="6"
+            Grid.Column="1"
+            Content="Add Travel"
+            Margin="10"
+            Height="40"
+            Width="100"
+            Background="MintCream"
+            FontSize="16"/>
+        <Button
+            Grid.Row="6"
+            Grid.Column="2"
+            Content="Remove"
+            Margin="10"
+            Height="40"
+            Width="100"
+            Background="MintCream"
+            FontSize="16"/>
+        <Button
+            Grid.Row="6"
+            Grid.Column="3"
+            Content="Show details"
+            Margin="10"
+            Height="40"
+            Width="100"
+            Background="MintCream"
+            FontSize="16"/>
+
+
+    </Grid>
+</Window>

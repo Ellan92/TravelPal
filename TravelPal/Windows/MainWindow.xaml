@@ -67,7 +67,8 @@
             Grid.Column="1"
             Margin="20"
             Background="MintCream"/>
-        <TextBox
+        
+        <PasswordBox
             Name="txtPassword"
             Grid.Row="3"
             Grid.Column="2"
@@ -85,7 +86,7 @@
             Margin="20"
             Width="120"
             Background="MintCream"
-            Foreground="Black"/>
+            Foreground="Black" Click="btnLogIn_Click"/>
         <Button
             Name="btnRegister"
             Content="Register!"
@@ -98,7 +99,7 @@
             Width="120"
             Background="Transparent"
             Foreground="MediumSlateBlue"
-            BorderBrush="Transparent"/>
+            BorderBrush="Transparent" Click="btnRegister_Click"/>
 
         <TextBlock
             Grid.Column="1"

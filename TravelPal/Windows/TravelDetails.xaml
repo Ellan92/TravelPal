@@ -29,7 +29,130 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
+
+        <Label
+            Content="Details"
+            Grid.Column="1"
+            Grid.Row="1"
+            Grid.ColumnSpan="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            FontFamily="Arial"
+            FontSize="30"
+            Foreground="MintCream"/>
+
+        <Label
+            Content="Country:"
+            Grid.Row="2"
+            Grid.Column="1"
+            VerticalAlignment="Center"
+            Foreground="MintCream"
+            FontFamily="Arial"
+            FontSize="20"
+            HorizontalAlignment="Center"/>
+        <Label
+            Content="City:"
+            Grid.Row="3"
+            Grid.Column="1"
+            VerticalAlignment="Center"
+            Foreground="MintCream"
+            FontFamily="Arial"
+            FontSize="20"
+            HorizontalAlignment="Center"/>
+        <Label
+            Content="Travelers:"
+            Grid.Row="4"
+            Grid.Column="1"
+            VerticalAlignment="Center"
+            Foreground="MintCream"
+            FontFamily="Arial"
+            FontSize="20"
+            HorizontalAlignment="Center"/>
+        <Label
+            Content="Travel Type:"
+            Grid.Row="5"
+            Grid.Column="1"
+            VerticalAlignment="Center"
+            Foreground="MintCream"
+            FontFamily="Arial"
+            FontSize="20"
+            HorizontalAlignment="Center"/>
+        <Label
+            Content="All Inclusive:"
+            Grid.Row="6"
+            Grid.Column="1"
+            VerticalAlignment="Center"
+            Foreground="MintCream"
+            FontFamily="Arial"
+            FontSize="20"
+            HorizontalAlignment="Center"/>
+        <Label
+            Content="Meeting Details:"
+            Grid.Row="7"
+            Grid.Column="1"
+            Grid.ColumnSpan="2"
+            VerticalAlignment="Center"
+            Foreground="MintCream"
+            FontFamily="Arial"
+            FontSize="20"
+            HorizontalAlignment="Center"/>
+
+        <TextBlock
+            Name="txtCountry"
+            Grid.Row="2"
+            Grid.Column="2"
+            Foreground="MintCream"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            Text="USA"
+            FontSize="20"/>
+        <TextBlock
+            Name="txtCity"
+            Grid.Row="3"
+            Grid.Column="2"
+            Foreground="MintCream"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            Text=""
+            FontSize="20"/>
+        <TextBlock
+            Name="txtTravelers"
+            Grid.Row="4"
+            Grid.Column="2"
+            Foreground="MintCream"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            Text=""
+            FontSize="20"/>
+        <TextBlock
+            Name="txtTravelType"
+            Grid.Row="5"
+            Grid.Column="2"
+            Foreground="MintCream"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            Text=""
+            FontSize="20"/>
+        <TextBlock
+            Name="txtAllInclusive"
+            Grid.Row="6"
+            Grid.Column="2"
+            Foreground="MintCream"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            Text=""
+            FontSize="20"/>
+
+        <TextBox
+            Name="txtMeetingDetails"
+            Grid.Row="8"
+            Grid.Column="1"
+            Grid.RowSpan="2"
+            Grid.ColumnSpan="2"/>
+
     </Grid>
 </Window>

@@ -9,6 +9,7 @@ namespace TravelPal
     /// </summary>
     public partial class MainWindow : Window
     {
+
         public MainWindow()
         {
             InitializeComponent();
@@ -46,5 +47,6 @@ namespace TravelPal
             registerWindow.Show();
             Close();
         }
+
     }
 }

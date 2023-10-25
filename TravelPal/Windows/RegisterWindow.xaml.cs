@@ -1,20 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using TravelPal.Interfaces;
+using TravelPal.Enums;
 using TravelPal.Managers;
-using TravelPal.Models;
 
 namespace TravelPal
 {
@@ -26,6 +13,7 @@ namespace TravelPal
         public RegisterWindow()
         {
             InitializeComponent();
+            LoadCountries();
         }
 
         private void btnSignUp_Click(object sender, RoutedEventArgs e)
@@ -34,27 +22,30 @@ namespace TravelPal
 
             string username = txtUsername.Text;
             string password = txtPassword.Password;
+            string country = cbCountry.Text;
 
             // TODO: Läs Country
 
-            // Kolla så att username eller password inte är tomma
-            if (!string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(password))
+            // Kolla så att username, password och country inte är tomma
+            if (!string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(password) && cbCountry.SelectedIndex > -1)
             {
                 // Kolla om username redan är taget 
-                if (UserManager.RegisterUser(username, password) == null)
+                if (UserManager.RegisterUser(username, password, country) == null)
                 {
                     // Om taget - Messagebox
-                    MessageBox.Show("Username already taken!");
+                    MessageBox.Show("Username already taken!", "Warning");
                 }
                 else
                 {
                     // Om inte - registrera ny user
-                    UserManager.RegisterUser(username, password);
+                    UserManager.RegisterUser(username, password, country: cbCountry.ToString());
 
                     // Messagebox - Welcome
-                    MessageBox.Show("Welcome to TravelPal, you may now log in");
+                    MessageBox.Show("Welcome to TravelPal, you may now log in.");
 
                     // Öppna MainWindow
+                    // TODO: Skicka med user
+
                     MainWindow mainWindow = new();
                     mainWindow.Show();
 
@@ -65,9 +56,24 @@ namespace TravelPal
             else
             {
                 // Om tomma - Messagebox
-                // Även om rutorna är tomma så står det "Username already taken!" Varför?
-                MessageBox.Show("You must fill in all fields.");
+                MessageBox.Show("You must fill in all fields.", "Warning");
             }
+        }
+
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow = new();
+            mainWindow.Show();
+            Close();
+        }
+
+        public void LoadCountries()
+        {
+            foreach (Country country in Enum.GetValues(typeof(Country)))
+            {
+                cbCountry.Items.Add(country);
+            }
+
         }
     }
 }

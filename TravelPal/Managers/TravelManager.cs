@@ -1,18 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using TravelPal.Models;
 
 namespace TravelPal.Managers
 {
-    public class TravelManager
+    public static class TravelManager
     {
-        List<Travel> travels = new()
+        public static List<Travel> Travels { get; set; } = new()
         {
-            new Travel { Destination = "New York", Countries = Enums.Country.USA, Travelers = 4, TravelDays = 14 }
+            new Travel { Destination = "New York", Country = Enums.Country.USA, Travelers = 4, TravelDays = 14 },
+            new Travel { Destination = "Stockholm", Country = Enums.Country.Sweden, Travelers = 2, TravelDays = 3 }
+
         };
 
+
+
+        //public static Travel GetTravels()
+        //{
+        //    foreach (var travel in Travels)
+        //    {
+        //        return travel;
+        //    }
+
+        //}
     }
 }

@@ -42,9 +42,21 @@
             FontSize="40"
             Foreground="MintCream"/>
         <Label
-            Content="User"
+            Name="lblUsername"
+            Content=""
             Grid.Column="1"
             Grid.Row="1"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            FontFamily="Arial"
+            FontSize="18"
+            Foreground="MintCream"
+            Margin="10 0 0 0"/>
+        <Label
+            Name="lblCountry"
+            Content=""
+            Grid.Column="1"
+            Grid.Row="2"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             FontFamily="Arial"
@@ -62,6 +74,7 @@
             Foreground="MintCream"/>
 
         <ListView
+            Name="lvTravels"
             Grid.Column="1"
             Grid.Row="3"
             Grid.ColumnSpan="3"
@@ -69,15 +82,17 @@
             Margin="40 0"/>
 
         <Button
+            Name="btnSignOut"
             Grid.Row="1"
             Grid.Column="1"
             Height="30"
             Width="80"
             VerticalAlignment="Bottom"
             HorizontalAlignment="Left"
+            Margin="10 0 0 0"
             Background="MintCream"
             Content="Sign out"
-            FontSize="16"/>
+            FontSize="16" Click="Button_Click"/>
         <Button
             Content="Info"
             FontFamily="Arial"
@@ -91,7 +106,7 @@
             Foreground="MintCream"
             BorderBrush="Transparent"
             VerticalAlignment="Center"
-            HorizontalAlignment="Right"/>
+            HorizontalAlignment="Right" Click="Button_Click_1"/>
         <Button
             Grid.Row="6"
             Grid.Column="1"
@@ -100,7 +115,7 @@
             Height="40"
             Width="100"
             Background="MintCream"
-            FontSize="16"/>
+            FontSize="16" Click="AddTravel_Click"/>
         <Button
             Grid.Row="6"
             Grid.Column="2"

@@ -94,9 +94,10 @@
             Grid.Row="4"
             Margin="20"
             Width="120"
-            Background="MintCream"/>
+            Background="MintCream" Click="btnCancel_Click"/>
 
         <ComboBox
+            Text="Select Country"
             Name="cbCountry"
             Grid.Column="1"
             Grid.Row="5"

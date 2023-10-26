@@ -6,12 +6,18 @@ using System.Threading.Tasks;
 
 namespace TravelPal.Models
 {
-    public class WorkTrip
+    public class WorkTrip : Travel
     {
         public string MeetingDetails { get; set; }
-        public WorkTrip(string meetingDetails)
+
+        //public WorkTrip(string meetingDetails)
+        //{
+        //    MeetingDetails = meetingDetails;
+        //}
+
+        public override string GetInfo()
         {
-            MeetingDetails = meetingDetails;
+            return $"{MeetingDetails}";
         }
 
         //GetInfo()

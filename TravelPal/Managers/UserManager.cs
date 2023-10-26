@@ -9,7 +9,10 @@ namespace TravelPal.Managers
 
         public static List<IUser> Users { get; set; } = new()
         {
-            new User ("user", "password", "USA")
+            new User ("user", "password", "USA") {
+            Travels = new List<Travel> { 
+            new Vacation { Destination = "New York", Country = Enums.Country.USA, Travelers = 4, TravelDays = 14, AllInclusive = true },
+            new WorkTrip { Destination = "Stockholm", Country = Enums.Country.Sweden, Travelers = 2, TravelDays = 3, MeetingDetails = "Meeting at 17:30" } } }
         };
         public static IUser? signedInUser { get; set; }
 

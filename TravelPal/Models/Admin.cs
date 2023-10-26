@@ -1,4 +1,5 @@
-﻿using TravelPal.Interfaces;
+﻿using System.Collections.Generic;
+using TravelPal.Interfaces;
 
 namespace TravelPal.Models
 {
@@ -7,5 +8,8 @@ namespace TravelPal.Models
         public string Username { get; set; }
         public string Password { get; set; }
         public string Country { get; set; }
+
+        public List<Travel> Travels { get; set; }
+
     }
 }

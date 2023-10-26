@@ -9,10 +9,11 @@ namespace TravelPal.Models
         public int Travelers { get; set; }
         public int TravelDays { get; set; }
 
-        public string GetInfo()
+        public virtual string GetInfo()
         {
             return $"{Country}";
         }
+
         //public Travel(string destination, Country countries, int travelers, int travelDays)
         //{
         //    Destination = destination;

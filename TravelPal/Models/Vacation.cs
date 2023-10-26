@@ -7,16 +7,21 @@ using System.Threading.Tasks;
 
 namespace TravelPal.Models
 {
-    public class Vacation
+    public class Vacation : Travel
     {
         public bool AllInclusive { get; set; }
-        public Vacation(bool allInclusive)
-        {
-            AllInclusive = allInclusive;
-        }
-        //public string GetInfo(bool allInclusive)
+        //public Vacation(bool allInclusive)
         //{
-
+        //    AllInclusive = allInclusive;
         //}
+        public override string GetInfo()
+        {
+            if (AllInclusive == true)
+            {
+                return $"Yes";
+            }
+            return $"No";
+            
+        }
     }
 }

@@ -67,6 +67,14 @@
             Foreground="MintCream"
             FontFamily="Arial"/>
         <Label
+            Content="Travel Days:"
+            Grid.Row="4"
+            Grid.Column="1"
+            Margin="15 0 0 20"
+            VerticalAlignment="Center"
+            Foreground="MintCream"
+            FontFamily="Arial"/>
+        <Label
             Content="Vacation type:"
             Grid.Row="3"
             Grid.Column="1"
@@ -113,7 +121,7 @@
             Height="30"
             VerticalAlignment="Bottom"
             Background="MintCream"
-            Foreground="MintCream"/>
+            Foreground="MediumSlateBlue"/>
         <ComboBox
             Name="cbVacationType"
             Grid.Column="1"
@@ -154,6 +162,14 @@
             Name="txtNumberOfTravelers"
             Grid.Column="3"
             Grid.Row="2"
+            Width="150"
+            Height="30"
+            VerticalAlignment="Bottom"
+            Background="MintCream"/>
+        <TextBox
+            Name="txtTravelDays"
+            Grid.Column="1"
+            Grid.Row="4"
             Width="150"
             Height="30"
             VerticalAlignment="Bottom"
@@ -201,7 +217,8 @@
             Width="120"
             Background="MintCream"
             Foreground="MediumSlateBlue"
-            FontSize="16"/>
+            FontSize="16" 
+            Click="btnSaveTravel_Click"/>
         <Button
             Content="Go Back"
             Grid.Column="3"

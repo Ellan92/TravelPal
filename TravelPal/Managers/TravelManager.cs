@@ -7,12 +7,16 @@ namespace TravelPal.Managers
     {
         public static List<Travel> Travels { get; set; } = new()
         {
-            new Vacation { Destination = "New York", Country = Enums.Country.USA, Travelers = 4, TravelDays = 14, AllInclusive = true },
+            //new Vacation { Destination = "New York", Country = Enums.Country.USA, Travelers = 4, TravelDays = 14, AllInclusive = true },
 
-            new WorkTrip { Destination = "Stockholm", Country = Enums.Country.Sweden, Travelers = 2, TravelDays = 3, MeetingDetails = "Meeting at 17:30" }
+            //new WorkTrip { Destination = "Stockholm", Country = Enums.Country.Sweden, Travelers = 2, TravelDays = 3, MeetingDetails = "Meeting at 17:30" }
 
         };
 
+        public static void addTravel()
+        {
+
+        }
         public static void removeTravel(Travel travel)
         {
             Travels.Remove(travel);

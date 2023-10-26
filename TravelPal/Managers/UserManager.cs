@@ -11,8 +11,16 @@ namespace TravelPal.Managers
         {
             new User ("user", "password", "USA") {
             Travels = new List<Travel> { 
-            new Vacation { Destination = "New York", Country = Enums.Country.USA, Travelers = 4, TravelDays = 14, AllInclusive = true },
-            new WorkTrip { Destination = "Stockholm", Country = Enums.Country.Sweden, Travelers = 2, TravelDays = 3, MeetingDetails = "Meeting at 17:30" } } }
+
+            //new Vacation { Destination = "New York", Country = Enums.Country.USA, Travelers = 4, TravelDays = 14, AllInclusive = true },
+
+            new Vacation ("New York", Enums.Country.USA, 4, 14, true),
+
+            //new WorkTrip { Destination = "Stockholm", Country = Enums.Country.Sweden, Travelers = 2, TravelDays = 3, MeetingDetails = "Meeting at 17:30" } } },
+
+            new WorkTrip ("Stockholm", Enums.Country.Sweden, 2, 3, "Meeting at 17:30") } },
+
+            new Admin("admin", "password", "Sweden")
         };
         public static IUser? signedInUser { get; set; }
 

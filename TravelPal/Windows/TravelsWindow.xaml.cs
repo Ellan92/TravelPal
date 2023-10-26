@@ -108,16 +108,6 @@ namespace TravelPal.Windows
 
             }
 
-            //ListViewItem selectedTravel = (ListViewItem)lvTravels.SelectedItem;
-
-            //lvTravels.Items.Remove(selectedTravel);
-
-            //Travel travel = (Travel)selectedTravel.Tag;
-
-            //TravelManager.removeTravel(travel);
-
-            //Travel travel = (Travel)selectedTravel.Tag;
-
             
         }
     }

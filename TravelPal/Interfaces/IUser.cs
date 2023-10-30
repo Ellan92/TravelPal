@@ -11,6 +11,6 @@ namespace TravelPal.Interfaces
 
         public string Country { get; set; }
 
-        public List<Travel> Travels { get; set; }
+        public List<Travel>? Travels { get; set; }
     }
 }

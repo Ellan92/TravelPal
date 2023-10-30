@@ -14,16 +14,19 @@ namespace TravelPal.Windows
     /// </summary>
     public partial class TravelsWindow : Window
     {
+        
+
         public TravelsWindow()
         {
             InitializeComponent();
+
             List<IUser> users = UserManager.Users;
 
 
             lblUsername.Content = UserManager.signedInUser?.Username;
             lblCountry.Content = UserManager.signedInUser?.Country;
 
-            List<Travel> allTravels = UserManager.signedInUser.Travels;
+            List<Travel> allTravels = UserManager.signedInUser!.Travels;
 
             if(allTravels != null)
             {
@@ -36,6 +39,8 @@ namespace TravelPal.Windows
                     lvTravels.Items.Add(item);
                 }
             }
+
+            
 
             //foreach (Travel travel in allTravels.ToList())
             //{
@@ -73,14 +78,28 @@ namespace TravelPal.Windows
 
         private void ShowDetails_Click(object sender, RoutedEventArgs e)
         {
+            if(lvTravels.SelectedItem != null)
+            {
+                ListViewItem selectedTravel = (ListViewItem)lvTravels.SelectedItem;
 
-            ListViewItem selectedTravel = (ListViewItem)lvTravels.SelectedItem;
+                Travel travel = (Travel)selectedTravel.Tag;
 
-            Travel travel = (Travel)selectedTravel.Tag;
+                TravelDetails travelDetails = new(travel);
+                travelDetails.Show();
+                Close();
+            }
+            else
+            {
+                MessageBox.Show("You need to select a travel first!", "Warning");
+            }
 
-            TravelDetails travelDetails = new(travel);
-            travelDetails.Show();
-            Close();
+            //ListViewItem selectedTravel = (ListViewItem)lvTravels.SelectedItem;
+
+            //Travel travel = (Travel)selectedTravel.Tag;
+
+            //TravelDetails travelDetails = new(travel);
+            //travelDetails.Show();
+            //Close();
             
         }
 

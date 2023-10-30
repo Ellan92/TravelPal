@@ -13,10 +13,10 @@ namespace TravelPal.Managers
 
         };
 
-        public static void addTravel()
-        {
+        //public static void addTravel()
+        //{
 
-        }
+        //}
         public static void removeTravel(Travel travel)
         {
             Travels.Remove(travel);

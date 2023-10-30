@@ -16,6 +16,10 @@ namespace TravelPal.Models
             MeetingDetails = meetingDetails;
         }
 
+        public WorkTrip()
+        {
+            
+        }
         public override string GetInfo()
         {
             return $"{MeetingDetails}";

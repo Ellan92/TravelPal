@@ -17,6 +17,11 @@ namespace TravelPal.Models
             TravelDays = traveldays;
         }
 
+        public Travel()
+        {
+            
+        }
+
         public virtual string GetInfo()
         {
             return $"{Country}";

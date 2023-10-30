@@ -15,6 +15,10 @@ namespace TravelPal.Models
         {
             AllInclusive = allInclusive;
         }
+        public Vacation()
+        {
+            
+        }
         public override string GetInfo()
         {
             if (AllInclusive == true)

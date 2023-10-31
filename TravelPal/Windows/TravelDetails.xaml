@@ -32,6 +32,7 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
+            <RowDefinition/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
 
@@ -74,8 +75,17 @@
             FontSize="20"
             HorizontalAlignment="Center"/>
         <Label
-            Content="Travel Type:"
+            Content="Travel Days:"
             Grid.Row="5"
+            Grid.Column="1"
+            VerticalAlignment="Center"
+            Foreground="MintCream"
+            FontFamily="Arial"
+            FontSize="20"
+            HorizontalAlignment="Center"/>
+        <Label
+            Content="Travel Type:"
+            Grid.Row="6"
             Grid.Column="1"
             VerticalAlignment="Center"
             Foreground="MintCream"
@@ -85,13 +95,14 @@
         <Label
             Name="lblAllInclusive"
             Content="All Inclusive:"
-            Grid.Row="6"
+            Grid.Row="7"
             Grid.Column="1"
             VerticalAlignment="Center"
             Foreground="MintCream"
             FontFamily="Arial"
             FontSize="20"
-            HorizontalAlignment="Center"/>
+            HorizontalAlignment="Center"
+            Visibility="Hidden"/>
         <Label
             Name="lblMeetingDetails"
             Content="Meeting Details:"
@@ -142,7 +153,7 @@
             Text=""
             FontSize="20"/>
         <TextBlock
-            Name="txtTravelType"
+            Name="txtTravelDays"
             Grid.Row="5"
             Grid.Column="2"
             Foreground="MintCream"
@@ -151,8 +162,17 @@
             Text=""
             FontSize="20"/>
         <TextBlock
-            Name="txtAllInclusive"
+            Name="txtTravelType"
             Grid.Row="6"
+            Grid.Column="2"
+            Foreground="MintCream"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            Text=""
+            FontSize="20"/>
+        <TextBlock
+            Name="txtAllInclusive"
+            Grid.Row="7"
             Grid.Column="2"
             Foreground="MintCream"
             VerticalAlignment="Center"
@@ -164,17 +184,18 @@
             Name="txtMeetingDetails"
             Grid.Row="8"
             Grid.Column="1"
-            Grid.RowSpan="2"
+            Grid.RowSpan="3"
             Grid.ColumnSpan="2"
             Margin="10"
             Background="MintCream"
             IsReadOnly="True"/>
 
         <ListView
+            Name="lstPackingList"
             Grid.Row="3"
             Grid.Column="3"
             Grid.ColumnSpan="2"
-            Grid.RowSpan="7"
+            Grid.RowSpan="8"
             Margin="10"
             Background="MintCream"/>
 

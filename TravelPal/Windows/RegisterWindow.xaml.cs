@@ -22,9 +22,10 @@ namespace TravelPal
 
             string username = txtUsername.Text;
             string password = txtPassword.Password;
-            string country = cbCountry.Text;
+            Country country = (Country)cbCountry.SelectedItem;     
 
-            // TODO: Läs Country
+            // TODO: Om inget country är valt crashar programmet
+
 
             // Kolla så att username, password och country inte är tomma
             if (!string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(password) && cbCountry.SelectedIndex > -1)
@@ -38,7 +39,7 @@ namespace TravelPal
                 else
                 {
                     // Om inte - registrera ny user
-                    UserManager.RegisterUser(username, password, country: cbCountry.ToString());
+                    UserManager.RegisterUser(username, password, country);
 
                     // Messagebox - Welcome
                     MessageBox.Show("Welcome to TravelPal, you may now log in.");

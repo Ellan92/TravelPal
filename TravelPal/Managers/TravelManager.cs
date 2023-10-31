@@ -1,35 +1,47 @@
 ﻿using System.Collections.Generic;
+using System.Windows.Controls;
+using TravelPal.Interfaces;
 using TravelPal.Models;
 
 namespace TravelPal.Managers
 {
     public static class TravelManager
     {
-        public static List<Travel> Travels { get; set; } = new()
-        {
-            //new Vacation { Destination = "New York", Country = Enums.Country.USA, Travelers = 4, TravelDays = 14, AllInclusive = true },
-
-            //new WorkTrip { Destination = "Stockholm", Country = Enums.Country.Sweden, Travelers = 2, TravelDays = 3, MeetingDetails = "Meeting at 17:30" }
-
-        };
-
-        //public static void addTravel()
-        //{
-
-        //}
+        //public static List<Travel> Travels = new();
         public static void removeTravel(Travel travel)
         {
-            Travels.Remove(travel);
+            User user = (User)UserManager.signedInUser;
+            user.Travels.Remove(travel);
+
+            //Travels = user.Travels;
+            //Travels.Remove(travel);
+
         }
 
-        public static void GetTravels()
+        public static void addTravel(Travel travelToAdd, User user)
         {
-            foreach (User user in UserManager.Users)
-            {
-                //user.Travels
-
-            }
+            //Travels = user.Travels;
+            //Travels.Add(travelToAdd);
         }
+
+
+        //public static void GetTravels(ListView view)
+        //{
+        //    foreach (IUser user in UserManager.Users)
+        //    {
+        //        if(user.Username == "admin")
+        //        {
+        //            continue;
+        //        }
+        //        foreach (Travel travel in TravelManager.Travels)
+        //        {
+        //            ListViewItem item = new();
+        //            item.Tag = travel;
+        //            item.Content = travel.GetInfo();
+        //            view.Items.Add(item);
+        //        }
+        //    }
+        //}
 
         //public static Travel GetTravels()
         //{

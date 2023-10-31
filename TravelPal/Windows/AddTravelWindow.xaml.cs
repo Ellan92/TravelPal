@@ -32,8 +32,6 @@ namespace TravelPal.Windows
 
         private void btnSaveTravel_Click(object sender, RoutedEventArgs e)
         {
-
-
             if (cbxVacationType.SelectedIndex == 0)
             {
 
@@ -54,7 +52,6 @@ namespace TravelPal.Windows
                 newVacation.Travelers = int.Parse(txtNumberOfTravelers.Text);
                 newVacation.TravelDays = int.Parse(txtTravelDays.Text);
 
-
                 UserManager.signedInUser?.Travels.Add(newVacation);
 
                 MessageBox.Show("Vacation saved!", "Success!");
@@ -73,10 +70,9 @@ namespace TravelPal.Windows
                 workTrip.TravelDays = int.Parse(txtTravelDays.Text);
                 workTrip.MeetingDetails = txtMeetingDetails.Text;
 
+                //TODO: Om Travelers eller TravelDays inte är siffra så crashar programmet
 
                 UserManager.signedInUser?.Travels.Add(workTrip);
-
-
 
                 MessageBox.Show("Work trip saved!", "Success!");
 

@@ -29,6 +29,7 @@ namespace TravelPal.Windows
             txtCountry.Text = travel.Country.ToString();
             txtCity.Text = travel.Destination.ToString();
             txtTravelers.Text = travel.Travelers.ToString();
+            txtTravelDays.Text = travel.TravelDays.ToString();
 
             if(travel.GetType() == typeof(WorkTrip))
             {
@@ -56,10 +57,6 @@ namespace TravelPal.Windows
                 lblMeetingDetails.Visibility = Visibility.Hidden;
                 txtMeetingDetails.Visibility = Visibility.Hidden;
             }
-
-            
-            
-            
 
         }
 

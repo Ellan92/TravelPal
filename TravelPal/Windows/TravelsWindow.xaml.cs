@@ -14,17 +14,51 @@ namespace TravelPal.Windows
     /// </summary>
     public partial class TravelsWindow : Window
     {
-        
 
+        //private IUser user;
+        
         public TravelsWindow()
         {
             InitializeComponent();
+            
+            lblUsername.Content = UserManager.signedInUser?.Username;
+            lblCountry.Content = UserManager.signedInUser?.Country;
 
             List<IUser> users = UserManager.Users;
 
+            if(UserManager.signedInUser.GetType() == typeof(Admin))
+            {
+                foreach (var user in UserManager.Users)
+                {
+                    if(user.Travels != null)
+                    {
+                        foreach (var travel in user.Travels)
+                        {
+                            ListViewItem item = new();
+                            item.Tag = travel;
+                            item.Content = travel.Country;
+                            lvTravels.Items.Add(item);
 
-            lblUsername.Content = UserManager.signedInUser?.Username;
-            lblCountry.Content = UserManager.signedInUser?.Country;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                foreach(IUser user in UserManager.Users)
+                {
+                    if(users.GetType() == typeof(User))
+                    {
+                        User userToRemoveTravelFrom = (User)user;
+
+                        ListViewItem selectedItem = new();
+                        selectedItem = (ListViewItem)lvTravels.SelectedItem;
+                        Travel selectedTravel = (Travel)selectedItem.Tag;
+                        lvTravels.Items.Remove(selectedItem);
+                    }
+                }
+            }
+
 
             List<Travel> allTravels = UserManager.signedInUser!.Travels;
 
@@ -92,14 +126,6 @@ namespace TravelPal.Windows
             {
                 MessageBox.Show("You need to select a travel first!", "Warning");
             }
-
-            //ListViewItem selectedTravel = (ListViewItem)lvTravels.SelectedItem;
-
-            //Travel travel = (Travel)selectedTravel.Tag;
-
-            //TravelDetails travelDetails = new(travel);
-            //travelDetails.Show();
-            //Close();
             
         }
 
@@ -123,6 +149,21 @@ namespace TravelPal.Windows
                     Travel travel = (Travel)selectedTravel.Tag;
 
                     TravelManager.removeTravel(travel);
+                    
+                    //var allTravels = lvTravels.Items;
+
+                    //List<Travel> allTravelsList = new();
+
+                    //foreach(var user in UserManager.Users)
+                    //{
+                    //    foreach(var Travel in user.Travels)
+                    //    {
+                    //        allTravelsList.Add(Travel);
+                    //    }
+                    //}
+
+                    
+
                 }
 
             }

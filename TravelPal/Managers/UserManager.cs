@@ -1,28 +1,28 @@
 ﻿using System.Collections.Generic;
+using TravelPal.Enums;
 using TravelPal.Interfaces;
 using TravelPal.Models;
 
 namespace TravelPal.Managers
 {
-    public class UserManager
+    public static class UserManager
     {
 
         public static List<IUser> Users { get; set; } = new()
         {
-            new User ("user", "password", "USA") {
-            Travels = new List<Travel> { 
 
-            //new Vacation { Destination = "New York", Country = Enums.Country.USA, Travelers = 4, TravelDays = 14, AllInclusive = true },
+            new User("user", "password", Country.USA) {
 
-            new Vacation ("New York", Enums.Country.USA, 4, 14, true),
+            Travels = new List<Travel> {
 
-            //new WorkTrip { Destination = "Stockholm", Country = Enums.Country.Sweden, Travelers = 2, TravelDays = 3, MeetingDetails = "Meeting at 17:30" } } },
+            new Vacation ("New York", Country.USA, 4, 14, true),
 
-            new WorkTrip ("Stockholm", Enums.Country.Sweden, 2, 3, "Meeting at 17:30") } },
-
-            new Admin("admin", "password", "Sweden")
+            new WorkTrip ("Stockholm", Country.Sweden, 2, 3, "Meeting at 17:30") }
+        },
+            new Admin("admin", "password", Country.Sweden)
         };
         public static IUser? signedInUser { get; set; }
+
 
         public static bool SignInUser(string username, string password)
         {
@@ -46,7 +46,7 @@ namespace TravelPal.Managers
             signedInUser = null;
         }
 
-        public static IUser? RegisterUser(string username, string password, string country)
+        public static IUser? RegisterUser(string username, string password, Country country)
         {
             if (ValidateUsername(username))
             {
@@ -74,5 +74,13 @@ namespace TravelPal.Managers
             }
             return isValidUsername;
         }
+        //public static void removeTravel(Travel travel, IUser user)
+        //{
+        //    user.Travels.Remove(travel);
+        //}
+        //public static void removeTravel(Travel travel)
+        //{
+        //    Travels.Remove(travel);
+        //}
     }
 }

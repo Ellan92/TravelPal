@@ -33,6 +33,7 @@
         </Grid.RowDefinitions>
         
         <Label
+            
             Content="Add Travel"
             Grid.Column="1"
             Grid.Row="1"
@@ -107,10 +108,20 @@
             Grid.Row="5"
             Grid.Column="1"
             Margin="15 0 15 0"
-            VerticalAlignment="Bottom"
+            VerticalAlignment="Top"
             HorizontalAlignment="Center"
             Foreground="MediumSlateBlue"
             FontFamily="Arial"/>
+        <Label
+            Content="Quantity:"
+            Grid.Row="6"
+            Grid.Column="1"
+            Margin="15 0 15 0"
+            VerticalAlignment="Top"
+            HorizontalAlignment="Center"
+            Foreground="MediumSlateBlue"
+            FontFamily="Arial"
+            Visibility="Visible"/>
 
 
         <ComboBox
@@ -143,13 +154,24 @@
             Foreground="MintCream"
             Visibility="Hidden"/>
         <CheckBox
+            Name="cbTravelDocument"
             Content="Travel document"
             Grid.Column="1"
             Grid.Row="6"
             VerticalAlignment="Bottom"
             HorizontalAlignment="Center"
+            Foreground="MediumSlateBlue" Checked="cbTravelDocument_Checked"
+            />
+        <CheckBox
+            Name="cbRequired"
+            Content="Required"
+            Grid.Column="1"
+            Grid.Row="6"
+            VerticalAlignment="Top"
+            HorizontalAlignment="Center"
             Margin="8"
-            Foreground="MediumSlateBlue"/>
+            Foreground="MediumSlateBlue"
+            Visibility="Hidden"/>
 
         <TextBox
             Name="txtCity"
@@ -189,10 +211,18 @@
         <TextBox
             Name="txtItem"
             Grid.Column="1"
-            Grid.Row="6"
+            Grid.Row="5"
             Width="150"
             Height="30"
-            VerticalAlignment="Top"
+            VerticalAlignment="Bottom"
+            Background="MintCream"/>
+        <TextBox
+            Name="txtItemQuantity"
+            Grid.Column="1"
+            Grid.Row="6"
+            Width="100"
+            Height="20"
+            VerticalAlignment="Center"
             Background="MintCream"/>
 
         <ListView
@@ -203,13 +233,14 @@
             Background="MintCream"/>
 
         <Button
+            Name="btnAddItem"
             Content="Add item"
             Grid.Column="1"
             Grid.Row="7"
             Height="30"
             Width="100"
             Background="MintCream"
-            Foreground="MediumSlateBlue"/>
+            Foreground="MediumSlateBlue" Click="btnAddItem_Click"/>
         <Button
             Content="Save Travel"
             Grid.Column="3"

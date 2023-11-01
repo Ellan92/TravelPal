@@ -20,6 +20,7 @@ namespace TravelPal.Windows
             cbxVacationType.Items.Add("Vacation");
             cbxVacationType.Items.Add("Work trip");
 
+
         }
 
         private void GoBack_Click(object sender, RoutedEventArgs e)
@@ -52,18 +53,7 @@ namespace TravelPal.Windows
                     if (int.TryParse(txtNumberOfTravelers.Text, out int parsedValue) && int.TryParse(txtTravelDays.Text, out int parsedValue2))
                     {
                         // Om inte - spara travel
-                        newVacation.Country = (Country)cbxCountry.SelectedItem;
-                        newVacation.Destination = txtCity.Text;
-                        newVacation.Travelers = int.Parse(txtNumberOfTravelers.Text);
-                        newVacation.TravelDays = int.Parse(txtTravelDays.Text);
-
-                        UserManager.signedInUser?.Travels.Add(newVacation);
-
-                        MessageBox.Show("Vacation saved!", "Success!");
-
-                        TravelsWindow travelsWindow = new();
-                        travelsWindow.Show();
-                        Close();
+                        AddVacation(newVacation);
                     }
                     else
                     {
@@ -86,21 +76,7 @@ namespace TravelPal.Windows
                 {
                     if (int.TryParse(txtNumberOfTravelers.Text, out int parsedValue) && int.TryParse(txtTravelDays.Text, out int parsedValue2))
                     {
-                        workTrip.Country = (Country)cbxCountry.SelectedItem;
-                        workTrip.Destination = txtCity.Text;
-                        workTrip.Travelers = int.Parse(txtNumberOfTravelers.Text);
-                        workTrip.TravelDays = int.Parse(txtTravelDays.Text);
-                        workTrip.MeetingDetails = txtMeetingDetails.Text;
-
-                        //TODO: Om Travelers eller TravelDays inte är siffra så crashar programmet
-
-                        UserManager.signedInUser?.Travels.Add(workTrip);
-
-                        MessageBox.Show("Work trip saved!", "Success!");
-
-                        TravelsWindow travelsWindow = new();
-                        travelsWindow.Show();
-                        Close();
+                        AddWorkTrip(workTrip);
                     }
                     else
                     {
@@ -115,6 +91,42 @@ namespace TravelPal.Windows
 
             }
         }
+
+        private void AddVacation(Vacation newVacation)
+        {
+            newVacation.Country = (Country)cbxCountry.SelectedItem;
+            newVacation.Destination = txtCity.Text;
+            newVacation.Travelers = int.Parse(txtNumberOfTravelers.Text);
+            newVacation.TravelDays = int.Parse(txtTravelDays.Text);
+
+            UserManager.signedInUser?.Travels.Add(newVacation);
+
+            MessageBox.Show("Vacation saved!", "Success!");
+
+            TravelsWindow travelsWindow = new();
+            travelsWindow.Show();
+            Close();
+        }
+
+        private void AddWorkTrip(WorkTrip workTrip)
+        {
+            workTrip.Country = (Country)cbxCountry.SelectedItem;
+            workTrip.Destination = txtCity.Text;
+            workTrip.Travelers = int.Parse(txtNumberOfTravelers.Text);
+            workTrip.TravelDays = int.Parse(txtTravelDays.Text);
+            workTrip.MeetingDetails = txtMeetingDetails.Text;
+
+            //TODO: Om Travelers eller TravelDays inte är siffra så crashar programmet
+
+            UserManager.signedInUser?.Travels.Add(workTrip);
+
+            MessageBox.Show("Work trip saved!", "Success!");
+
+            TravelsWindow travelsWindow = new();
+            travelsWindow.Show();
+            Close();
+        }
+
         public void LoadCountries()
         {
             foreach (Country country in Enum.GetValues(typeof(Country)))
@@ -138,6 +150,38 @@ namespace TravelPal.Windows
                 lblMeetingDetails.Visibility = Visibility.Visible;
 
                 cbAllInclusive.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void btnAddItem_Click(object sender, RoutedEventArgs e)
+        {
+            if (cbTravelDocument.IsChecked == true)
+            {
+                TravelDocument travelDocument = new();
+
+            }
+            else
+            {
+                OtherItem item = new();
+                item.Name = txtItem.Text;
+                item.Quantity = int.Parse(txtItemQuantity.Text);
+
+            }
+        }
+
+        private void cbTravelDocument_Checked(object sender, RoutedEventArgs e)
+        {
+            if (cbTravelDocument.IsChecked == true)
+            {
+
+                txtItemQuantity.Visibility = Visibility.Hidden;
+                cbRequired.Visibility = Visibility.Visible;
+
+            }
+            else
+            {
+                txtItemQuantity.Visibility = Visibility.Visible;
+                cbRequired.Visibility = Visibility.Hidden;
             }
         }
     }

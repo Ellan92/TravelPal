@@ -12,6 +12,11 @@ namespace TravelPal.Models
             Name = name;
             Required = required;
         }
+
+        public TravelDocument()
+        {
+
+        }
         //public override string GetInfo()
         //{
 

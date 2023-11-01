@@ -8,6 +8,12 @@ namespace TravelPal.Models
         public int Quantity { get; set; }
         public OtherItem(string name, int quantity)
         {
+            Name = name;
+            Quantity = quantity;
+        }
+
+        public OtherItem()
+        {
 
         }
         //public override string GetInfo()

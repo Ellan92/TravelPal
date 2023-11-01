@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Windows.Controls;
-using TravelPal.Interfaces;
+﻿using TravelPal.Interfaces;
 using TravelPal.Models;
 
 namespace TravelPal.Managers
@@ -10,8 +8,24 @@ namespace TravelPal.Managers
         //public static List<Travel> Travels = new();
         public static void removeTravel(Travel travel)
         {
-            User user = (User)UserManager.signedInUser;
-            user.Travels.Remove(travel);
+            if (UserManager.signedInUser.GetType() == typeof(User))
+            {
+                User user = (User)UserManager.signedInUser;
+                user.Travels.Remove(travel);
+            }
+            else
+            {
+                foreach (IUser user in UserManager.Users)
+                {
+                    if (user.GetType() == typeof(User))
+                    {
+                        User selectedUser = (User)user;
+                        selectedUser.Travels.Remove(travel);
+                    }
+                }
+
+            }
+
 
             //Travels = user.Travels;
             //Travels.Remove(travel);

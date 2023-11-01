@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using TravelPal.Enums;
@@ -32,9 +31,10 @@ namespace TravelPal.Windows
 
         private void btnSaveTravel_Click(object sender, RoutedEventArgs e)
         {
+
+
             if (cbxVacationType.SelectedIndex == 0)
             {
-
 
                 Vacation newVacation = new();
 
@@ -60,7 +60,7 @@ namespace TravelPal.Windows
                 travelsWindow.Show();
                 Close();
             }
-            else if(cbxVacationType.SelectedIndex == 1)
+            else if (cbxVacationType.SelectedIndex == 1)
             {
                 WorkTrip workTrip = new();
 

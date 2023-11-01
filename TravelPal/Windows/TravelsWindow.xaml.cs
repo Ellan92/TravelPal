@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using TravelPal.Interfaces;
 using TravelPal.Managers;
 using TravelPal.Models;
 
@@ -16,21 +15,22 @@ namespace TravelPal.Windows
     {
 
         //private IUser user;
-        
+
         public TravelsWindow()
         {
             InitializeComponent();
-            
+
             lblUsername.Content = UserManager.signedInUser?.Username;
             lblCountry.Content = UserManager.signedInUser?.Country;
 
-            List<IUser> users = UserManager.Users;
 
-            if(UserManager.signedInUser.GetType() == typeof(Admin))
+            List<Travel> allTravels = UserManager.signedInUser.Travels;
+
+            if (UserManager.signedInUser?.GetType() == typeof(Admin))
             {
                 foreach (var user in UserManager.Users)
                 {
-                    if(user.Travels != null)
+                    if (user.Travels != null)
                     {
                         foreach (var travel in user.Travels)
                         {
@@ -45,45 +45,18 @@ namespace TravelPal.Windows
             }
             else
             {
-                foreach(IUser user in UserManager.Users)
+                if (allTravels != null)
                 {
-                    if(users.GetType() == typeof(User))
+                    foreach (Travel travel in allTravels.ToList())
                     {
-                        User userToRemoveTravelFrom = (User)user;
-
-                        ListViewItem selectedItem = new();
-                        selectedItem = (ListViewItem)lvTravels.SelectedItem;
-                        Travel selectedTravel = (Travel)selectedItem.Tag;
-                        lvTravels.Items.Remove(selectedItem);
+                        ListViewItem item = new();
+                        item.Tag = travel;
+                        item.Content = travel.Country.ToString();
+                        lvTravels.Items.Add(item);
                     }
                 }
             }
 
-
-            List<Travel> allTravels = UserManager.signedInUser!.Travels;
-
-            if(allTravels != null)
-            {
-                foreach (Travel travel in allTravels.ToList())
-                {
-                    ListViewItem item = new();
-                    item.Tag = travel;
-                    item.Content = travel.Country.ToString();
-
-                    lvTravels.Items.Add(item);
-                }
-            }
-
-            
-
-            //foreach (Travel travel in allTravels.ToList())
-            //{
-            //    ListViewItem item = new();
-            //    item.Tag = travel;
-            //    item.Content = travel.GetInfo();
-
-            //    lvTravels.Items.Add(item);
-            //}
 
         }
 
@@ -112,7 +85,7 @@ namespace TravelPal.Windows
 
         private void ShowDetails_Click(object sender, RoutedEventArgs e)
         {
-            if(lvTravels.SelectedItem != null)
+            if (lvTravels.SelectedItem != null)
             {
                 ListViewItem selectedTravel = (ListViewItem)lvTravels.SelectedItem;
 
@@ -126,12 +99,12 @@ namespace TravelPal.Windows
             {
                 MessageBox.Show("You need to select a travel first!", "Warning");
             }
-            
+
         }
 
         private void Remove_Click(object sender, RoutedEventArgs e)
         {
-            
+
             if (lvTravels.SelectedItem == null)
             {
                 MessageBox.Show("You need to select a travel first!");
@@ -140,7 +113,7 @@ namespace TravelPal.Windows
             {
                 MessageBoxResult messageBoxResult = MessageBox.Show("Are you sure you want to remove the selected travel?", "Confirmation", MessageBoxButton.YesNo);
 
-                if(messageBoxResult == MessageBoxResult.Yes)
+                if (messageBoxResult == MessageBoxResult.Yes)
                 {
                     ListViewItem selectedTravel = (ListViewItem)lvTravels.SelectedItem;
 
@@ -149,26 +122,11 @@ namespace TravelPal.Windows
                     Travel travel = (Travel)selectedTravel.Tag;
 
                     TravelManager.removeTravel(travel);
-                    
-                    //var allTravels = lvTravels.Items;
-
-                    //List<Travel> allTravelsList = new();
-
-                    //foreach(var user in UserManager.Users)
-                    //{
-                    //    foreach(var Travel in user.Travels)
-                    //    {
-                    //        allTravelsList.Add(Travel);
-                    //    }
-                    //}
-
-                    
-
                 }
 
             }
 
-            
+
         }
     }
 }

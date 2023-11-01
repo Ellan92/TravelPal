@@ -108,6 +108,7 @@
             VerticalAlignment="Center"
             HorizontalAlignment="Right" Click="Button_Click_1"/>
         <Button
+            Name="btnAddTravel"
             Grid.Row="6"
             Grid.Column="1"
             Content="Add Travel"

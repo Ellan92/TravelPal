@@ -25,11 +25,6 @@ namespace TravelPal.Managers
                 }
 
             }
-
-
-            //Travels = user.Travels;
-            //Travels.Remove(travel);
-
         }
 
         public static void addTravel(Travel travelToAdd, User user)

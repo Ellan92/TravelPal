@@ -1,4 +1,6 @@
-﻿using TravelPal.Enums;
+﻿using System.Collections.Generic;
+using TravelPal.Enums;
+using TravelPal.Interfaces;
 
 namespace TravelPal.Models
 {
@@ -8,6 +10,16 @@ namespace TravelPal.Models
         public Country Country { get; set; }
         public int Travelers { get; set; }
         public int TravelDays { get; set; }
+        public List<PackingListItem> PackingList { get; set; } = new();
+
+        public Travel(string destination, Country country, int travelers, int traveldays, List<PackingListItem> item)
+        {
+            Destination = destination;
+            Country = country;
+            Travelers = travelers;
+            TravelDays = traveldays;
+            PackingList = item;
+        }
 
         public Travel(string destination, Country country, int travelers, int traveldays)
         {
@@ -19,7 +31,7 @@ namespace TravelPal.Models
 
         public Travel()
         {
-            
+
         }
 
         public virtual string GetInfo()

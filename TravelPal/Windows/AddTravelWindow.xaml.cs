@@ -32,7 +32,7 @@ namespace TravelPal.Windows
         private void btnSaveTravel_Click(object sender, RoutedEventArgs e)
         {
 
-
+            // Kolla om resan är en vacation
             if (cbxVacationType.SelectedIndex == 0)
             {
 
@@ -46,42 +46,74 @@ namespace TravelPal.Windows
                 {
                     newVacation.AllInclusive = false;
                 }
+                // Kolla så alla textrutor och comboboxar inte är tomma
+                if (txtCity.Text != "" && !string.IsNullOrWhiteSpace(txtNumberOfTravelers.Text) && !string.IsNullOrWhiteSpace(txtTravelDays.Text) && cbxCountry.SelectedIndex != -1)
+                {
+                    if (int.TryParse(txtNumberOfTravelers.Text, out int parsedValue) && int.TryParse(txtTravelDays.Text, out int parsedValue2))
+                    {
+                        // Om inte - spara travel
+                        newVacation.Country = (Country)cbxCountry.SelectedItem;
+                        newVacation.Destination = txtCity.Text;
+                        newVacation.Travelers = int.Parse(txtNumberOfTravelers.Text);
+                        newVacation.TravelDays = int.Parse(txtTravelDays.Text);
 
-                newVacation.Country = (Country)cbxCountry.SelectedItem;
-                newVacation.Destination = txtCity.Text;
-                newVacation.Travelers = int.Parse(txtNumberOfTravelers.Text);
-                newVacation.TravelDays = int.Parse(txtTravelDays.Text);
+                        UserManager.signedInUser?.Travels.Add(newVacation);
 
-                UserManager.signedInUser?.Travels.Add(newVacation);
+                        MessageBox.Show("Vacation saved!", "Success!");
 
-                MessageBox.Show("Vacation saved!", "Success!");
+                        TravelsWindow travelsWindow = new();
+                        travelsWindow.Show();
+                        Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Travelers and Travel Days must be a number", "Warning");
+                    }
 
-                TravelsWindow travelsWindow = new();
-                travelsWindow.Show();
-                Close();
+                }
+                else
+                {
+                    // Om tom - MessageBox
+                    MessageBox.Show("Some of the fields are empty.", "Warning");
+                }
             }
+            // Kolla om det är en WorkTrip
             else if (cbxVacationType.SelectedIndex == 1)
             {
                 WorkTrip workTrip = new();
 
-                workTrip.Country = (Country)cbxCountry.SelectedItem;
-                workTrip.Destination = txtCity.Text;
-                workTrip.Travelers = int.Parse(txtNumberOfTravelers.Text);
-                workTrip.TravelDays = int.Parse(txtTravelDays.Text);
-                workTrip.MeetingDetails = txtMeetingDetails.Text;
+                if (txtCity.Text != "" && !string.IsNullOrWhiteSpace(txtNumberOfTravelers.Text) && !string.IsNullOrWhiteSpace(txtTravelDays.Text) && cbxCountry.SelectedIndex != -1)
+                {
+                    if (int.TryParse(txtNumberOfTravelers.Text, out int parsedValue) && int.TryParse(txtTravelDays.Text, out int parsedValue2))
+                    {
+                        workTrip.Country = (Country)cbxCountry.SelectedItem;
+                        workTrip.Destination = txtCity.Text;
+                        workTrip.Travelers = int.Parse(txtNumberOfTravelers.Text);
+                        workTrip.TravelDays = int.Parse(txtTravelDays.Text);
+                        workTrip.MeetingDetails = txtMeetingDetails.Text;
 
-                //TODO: Om Travelers eller TravelDays inte är siffra så crashar programmet
+                        //TODO: Om Travelers eller TravelDays inte är siffra så crashar programmet
 
-                UserManager.signedInUser?.Travels.Add(workTrip);
+                        UserManager.signedInUser?.Travels.Add(workTrip);
 
-                MessageBox.Show("Work trip saved!", "Success!");
+                        MessageBox.Show("Work trip saved!", "Success!");
 
-                TravelsWindow travelsWindow = new();
-                travelsWindow.Show();
-                Close();
+                        TravelsWindow travelsWindow = new();
+                        travelsWindow.Show();
+                        Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Travelers and Travel Days must be a number", "Warning");
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("Some of the fields are empty.", "Warning");
+                }
+
             }
-
-
         }
         public void LoadCountries()
         {

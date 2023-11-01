@@ -19,17 +19,14 @@ namespace TravelPal
         private void btnSignUp_Click(object sender, RoutedEventArgs e)
         {
             // Läst textrutorna username & password
-
             string username = txtUsername.Text;
             string password = txtPassword.Password;
-            Country country = (Country)cbCountry.SelectedItem;     
-
-            // TODO: Om inget country är valt crashar programmet
-
 
             // Kolla så att username, password och country inte är tomma
-            if (!string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(password) && cbCountry.SelectedIndex > -1)
+            if (!string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(password) && cbCountry.SelectedIndex != -1)
             {
+                Country country = (Country)cbCountry.SelectedItem;
+
                 // Kolla om username redan är taget 
                 if (UserManager.RegisterUser(username, password, country) == null)
                 {

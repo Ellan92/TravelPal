@@ -23,11 +23,11 @@ namespace TravelPal.Windows
             lblUsername.Content = UserManager.signedInUser?.Username;
             lblCountry.Content = UserManager.signedInUser?.Country;
 
-
             List<Travel> allTravels = UserManager.signedInUser.Travels;
 
             if (UserManager.signedInUser?.GetType() == typeof(Admin))
             {
+                btnAddTravel.IsEnabled = false;
                 foreach (var user in UserManager.Users)
                 {
                     if (user.Travels != null)
@@ -56,8 +56,6 @@ namespace TravelPal.Windows
                     }
                 }
             }
-
-
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -125,8 +123,6 @@ namespace TravelPal.Windows
                 }
 
             }
-
-
         }
     }
 }

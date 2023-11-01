@@ -1,23 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using TravelPal.Enums;
+using TravelPal.Interfaces;
 
 namespace TravelPal.Models
 {
     public class Vacation : Travel
     {
         public bool AllInclusive { get; set; }
-        public Vacation(string destination, Country country, int travelers, int travelDays, bool allInclusive) : base (destination, country, travelers, travelDays)
+        public List<PackingListItem> PackingList { get; set; } = new();
+        public Vacation(string destination, Country country, int travelers, int travelDays, bool allInclusive, List<PackingListItem> item) : base(destination, country, travelers, travelDays, item)
+        {
+            AllInclusive = allInclusive;
+            PackingList = item;
+        }
+
+        public Vacation(string destination, Country country, int travelers, int travelDays, bool allInclusive) : base(destination, country, travelers, travelDays)
         {
             AllInclusive = allInclusive;
         }
         public Vacation()
         {
-            
+
         }
         public override string GetInfo()
         {
@@ -26,7 +29,7 @@ namespace TravelPal.Models
                 return $"Yes";
             }
             return $"No";
-            
+
         }
     }
 }

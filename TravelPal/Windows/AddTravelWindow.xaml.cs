@@ -242,6 +242,8 @@ namespace TravelPal.Windows
 
         private void cbxCountry_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            
+
 
             bool isEuropeanCountry = false;
             bool isEuropeanUser = false;
@@ -254,6 +256,7 @@ namespace TravelPal.Windows
                     {
                         isEuropeanUser = true;
                     }
+
                 }
 
                 foreach (Country thisCountry in Enum.GetValues(typeof(EuropeanCountry)))

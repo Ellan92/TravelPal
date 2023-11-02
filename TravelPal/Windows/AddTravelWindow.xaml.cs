@@ -25,6 +25,8 @@ namespace TravelPal.Windows
             cbxVacationType.Items.Add("Vacation");
             cbxVacationType.Items.Add("Work trip");
 
+
+
         }
 
         private void GoBack_Click(object sender, RoutedEventArgs e)
@@ -98,10 +100,6 @@ namespace TravelPal.Windows
 
         private void AddVacation(Vacation newVacation)
         {
-            //OtherItem otherItem = new();
-            //otherItem.Name = txtItem.Text;
-            //otherItem.Quantity = int.Parse(txtItemQuantity.Text);
-
             List<PackingListItem> allItems = new();
 
             foreach (ListViewItem item in lvPackingList.Items)
@@ -136,11 +134,20 @@ namespace TravelPal.Windows
 
         private void AddWorkTrip(WorkTrip workTrip)
         {
+            List<PackingListItem> allItems = new();
+
+            foreach(ListViewItem item in lvPackingList.Items)
+            {
+                PackingListItem packingItem = (PackingListItem)item.Tag;
+                allItems.Add(packingItem);
+            }
+
             workTrip.Country = (Country)cbxCountry.SelectedItem;
             workTrip.Destination = txtCity.Text;
             workTrip.Travelers = int.Parse(txtNumberOfTravelers.Text);
             workTrip.TravelDays = int.Parse(txtTravelDays.Text);
             workTrip.MeetingDetails = txtMeetingDetails.Text;
+            workTrip.PackingList = allItems;
 
             //TODO: Om Travelers eller TravelDays inte är siffra så crashar programmet
 
@@ -184,6 +191,23 @@ namespace TravelPal.Windows
             if (cbTravelDocument.IsChecked == true)
             {
                 TravelDocument travelDocument = new();
+                travelDocument.Name = txtItem.Text;
+
+                if (cbRequired.IsChecked == true)
+                {
+                    travelDocument.Required = true;
+                }
+                else
+                {
+                    travelDocument.Required = false;
+                }
+
+                ListViewItem item = new();
+                item.Tag = travelDocument;
+                item.Content = travelDocument.GetInfo();
+
+                lvPackingList.Items.Add(item);
+
                 //travelDocument.Name = 
 
             }
@@ -214,6 +238,90 @@ namespace TravelPal.Windows
             txtItemQuantity.Visibility = Visibility.Visible;
             cbRequired.Visibility = Visibility.Hidden;
             lblQuantity.Visibility = Visibility.Visible;
+        }
+
+        private void cbxCountry_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+            bool isEuropeanCountry = false;
+            bool isEuropeanUser = false;
+
+            if(cbxCountry.SelectedIndex != -1)
+            {
+                foreach (Country europeanCountry in Enum.GetValues(typeof(EuropeanCountry)))
+                {
+                    if (UserManager.signedInUser?.Country == europeanCountry)
+                    {
+                        isEuropeanUser = true;
+                    }
+                }
+
+                foreach (Country thisCountry in Enum.GetValues(typeof(EuropeanCountry)))
+                {
+                    if ((Country)cbxCountry.SelectedItem == thisCountry)
+                    {
+                        isEuropeanCountry = true;
+                    }
+                }
+
+
+
+
+                if(isEuropeanCountry && isEuropeanUser)
+                {
+                    TravelDocument passport = new();
+                    passport.Name = "Passport";
+                    passport.Required = false;
+
+                    ListViewItem item = new();
+                    item.Tag = passport;
+                    item.Content = passport.GetInfo();
+
+                    lvPackingList.Items.Add(item);
+                }
+
+                else if(!isEuropeanCountry && isEuropeanUser)
+                {
+                    TravelDocument passport = new();
+                    passport.Name = "Passport";
+                    passport.Required = true;
+
+                    ListViewItem item = new();
+                    item.Tag = passport;
+                    item.Content = passport.GetInfo();
+
+                    lvPackingList.Items.Add(item);
+                }
+                else if (!isEuropeanCountry)
+                {
+                    TravelDocument passport = new();
+                    passport.Name = "Passport";
+                    passport.Required = true;
+
+                    ListViewItem item = new();
+                    item.Tag = passport;
+                    item.Content = passport.GetInfo();
+
+                    lvPackingList.Items.Add(item);
+                }
+            }
+
+
+            
+
+
+            //if (UserManager.signedInUser?.Country.GetType() == typeof(Country))
+            //{
+            //    TravelDocument passport = new();
+            //    passport.Name = "Passport";
+            //    passport.Required = true;
+
+            //    ListViewItem item = new();
+            //    item.Tag = passport;
+            //    item.Content = passport.GetInfo();
+
+            //    lvPackingList.Items.Add(item);
+            //}
         }
     }
 }

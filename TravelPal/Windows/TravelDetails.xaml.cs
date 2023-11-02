@@ -31,16 +31,19 @@ namespace TravelPal.Windows
             txtCity.Text = travel.Destination.ToString();
             txtTravelers.Text = travel.Travelers.ToString();
             txtTravelDays.Text = travel.TravelDays.ToString();
-            
-            
-            foreach(PackingListItem item in travel.PackingList)
-            {
-                ListViewItem listViewItem = new();
-                listViewItem.Tag = item;
-                listViewItem.Content = item.GetInfo();
 
-                lstPackingList.Items.Add(listViewItem);
+            if (travel.PackingList != null)
+            {
+                foreach (PackingListItem item in travel.PackingList)
+                {
+                    ListViewItem listViewItem = new();
+                    listViewItem.Tag = item;
+                    listViewItem.Content = item.GetInfo();
+
+                    lstPackingList.Items.Add(listViewItem);
+                }
             }
+
 
             if(travel.GetType() == typeof(WorkTrip))
             {

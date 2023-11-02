@@ -19,7 +19,7 @@ namespace TravelPal.Models
         }
         public string GetInfo()
         {
-            return $"{Name}";
+            return $"{Name} - Required: {Required}";
         }
     }
 }

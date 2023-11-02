@@ -133,7 +133,7 @@
             Height="30"
             VerticalAlignment="Bottom"
             Background="MintCream"
-            Foreground="MediumSlateBlue"/>
+            Foreground="MediumSlateBlue" SelectionChanged="cbxCountry_SelectionChanged"/>
         <ComboBox
             Name="cbxVacationType"
             Grid.Column="1"

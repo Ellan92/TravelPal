@@ -15,7 +15,8 @@ namespace TravelPal.Windows
     /// </summary>
     public partial class AddTravelWindow : Window
     {
-        List<PackingListItem> allItems = new();
+        public List<PackingListItem> allItems = new();
+
         public AddTravelWindow()
         {
             InitializeComponent();
@@ -101,8 +102,13 @@ namespace TravelPal.Windows
             //otherItem.Name = txtItem.Text;
             //otherItem.Quantity = int.Parse(txtItemQuantity.Text);
 
-            //List<PackingListItem> allItems = new();
+            List<PackingListItem> allItems = new();
 
+            foreach (ListViewItem item in lvPackingList.Items)
+            {
+                PackingListItem packingItem = (PackingListItem)item.Tag;
+                allItems.Add(packingItem);
+            }
 
             newVacation.Country = (Country)cbxCountry.SelectedItem;
             newVacation.Destination = txtCity.Text;
@@ -110,16 +116,13 @@ namespace TravelPal.Windows
             newVacation.TravelDays = int.Parse(txtTravelDays.Text);
             newVacation.PackingList = allItems;
 
-            allItems = newVacation.PackingList;
 
-            foreach (PackingListItem item in allItems)
-            {
-                newVacation.PackingList.Add(item);
-            }
+            //foreach (ListViewItem item in allPackingItems)
+            //{
+            //    newVacation.PackingList.Add((PackingListItem)item.Tag);
+            //}
 
-            //newVacation.PackingList = lvPackingList.Items;
 
-            //newVacation.PackingList.AddPackingListItem();
 
 
             UserManager.signedInUser?.Travels.Add(newVacation);
@@ -148,11 +151,6 @@ namespace TravelPal.Windows
             TravelsWindow travelsWindow = new();
             travelsWindow.Show();
             Close();
-        }
-
-        private void AddPackingListItem(PackingListItem item)
-        {
-            allItems.Add(item);
         }
 
         public void LoadCountries()
@@ -200,9 +198,8 @@ namespace TravelPal.Windows
                 item.Tag = otherItem;
                 item.Content = otherItem.GetInfo();
 
-                AddPackingListItem(otherItem);
                 lvPackingList.Items.Add(item);
-                
+
             }
         }
 

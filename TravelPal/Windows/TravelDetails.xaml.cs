@@ -37,7 +37,7 @@ namespace TravelPal.Windows
             {
                 ListViewItem listViewItem = new();
                 listViewItem.Tag = item;
-                listViewItem.Content = item.Name;
+                listViewItem.Content = item.GetInfo();
 
                 lstPackingList.Items.Add(listViewItem);
             }

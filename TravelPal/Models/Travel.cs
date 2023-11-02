@@ -10,15 +10,15 @@ namespace TravelPal.Models
         public Country Country { get; set; }
         public int Travelers { get; set; }
         public int TravelDays { get; set; }
-        public List<PackingListItem> PackingList { get; set; } = new();
+        public List<PackingListItem> PackingList { get; set; }
 
-        public Travel(string destination, Country country, int travelers, int traveldays, List<PackingListItem> item)
+        public Travel(string destination, Country country, int travelers, int traveldays, List<PackingListItem> items)
         {
             Destination = destination;
             Country = country;
             Travelers = travelers;
             TravelDays = traveldays;
-            PackingList = item;
+            PackingList = items;
         }
 
         public Travel(string destination, Country country, int travelers, int traveldays)

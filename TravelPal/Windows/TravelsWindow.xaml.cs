@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using TravelPal.Interfaces;
 using TravelPal.Managers;
 using TravelPal.Models;
 
@@ -23,7 +24,11 @@ namespace TravelPal.Windows
             lblUsername.Content = UserManager.signedInUser?.Username;
             lblCountry.Content = UserManager.signedInUser?.Country;
 
+            
             List<Travel> allTravels = UserManager.signedInUser.Travels;
+            
+            
+
 
             if (UserManager.signedInUser?.GetType() == typeof(Admin))
             {

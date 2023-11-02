@@ -5,7 +5,7 @@ namespace TravelPal.Managers
 {
     public static class TravelManager
     {
-        //public static List<Travel> Travels = new();
+        
         public static void removeTravel(Travel travel)
         {
             if (UserManager.signedInUser.GetType() == typeof(User))
@@ -25,12 +25,6 @@ namespace TravelPal.Managers
                 }
 
             }
-        }
-
-        public static void addTravel(Travel travelToAdd, User user)
-        {
-            //Travels = user.Travels;
-            //Travels.Add(travelToAdd);
         }
 
 

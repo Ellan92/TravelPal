@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TravelPal.Enums;
+using TravelPal.Interfaces;
 using TravelPal.Models;
 
 namespace TravelPal.Windows
@@ -30,6 +31,16 @@ namespace TravelPal.Windows
             txtCity.Text = travel.Destination.ToString();
             txtTravelers.Text = travel.Travelers.ToString();
             txtTravelDays.Text = travel.TravelDays.ToString();
+            
+            
+            foreach(PackingListItem item in travel.PackingList)
+            {
+                ListViewItem listViewItem = new();
+                listViewItem.Tag = item;
+                listViewItem.Content = item.Name;
+
+                lstPackingList.Items.Add(listViewItem);
+            }
 
             if(travel.GetType() == typeof(WorkTrip))
             {

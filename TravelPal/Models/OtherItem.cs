@@ -16,9 +16,9 @@ namespace TravelPal.Models
         {
 
         }
-        //public override string GetInfo()
-        //{
-
-        //}
+        public string GetInfo()
+        {
+            return $"{Name} - Quantity: {Quantity}";
+        }
     }
 }

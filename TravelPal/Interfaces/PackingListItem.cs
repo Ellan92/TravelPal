@@ -4,9 +4,9 @@
     {
         public string Name { get; set; }
 
-        //public virtual string GetInfo()
-        //{
-
-        //}
+        public virtual string GetInfo()
+        {
+            return $"{Name}";
+        }
     }
 }

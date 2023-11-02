@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using TravelPal.Enums;
+using TravelPal.Interfaces;
 using TravelPal.Managers;
 using TravelPal.Models;
 
@@ -12,6 +15,7 @@ namespace TravelPal.Windows
     /// </summary>
     public partial class AddTravelWindow : Window
     {
+        List<PackingListItem> allItems = new();
         public AddTravelWindow()
         {
             InitializeComponent();
@@ -19,7 +23,6 @@ namespace TravelPal.Windows
 
             cbxVacationType.Items.Add("Vacation");
             cbxVacationType.Items.Add("Work trip");
-
 
         }
 
@@ -94,10 +97,30 @@ namespace TravelPal.Windows
 
         private void AddVacation(Vacation newVacation)
         {
+            //OtherItem otherItem = new();
+            //otherItem.Name = txtItem.Text;
+            //otherItem.Quantity = int.Parse(txtItemQuantity.Text);
+
+            //List<PackingListItem> allItems = new();
+
+
             newVacation.Country = (Country)cbxCountry.SelectedItem;
             newVacation.Destination = txtCity.Text;
             newVacation.Travelers = int.Parse(txtNumberOfTravelers.Text);
             newVacation.TravelDays = int.Parse(txtTravelDays.Text);
+            newVacation.PackingList = allItems;
+
+            allItems = newVacation.PackingList;
+
+            foreach (PackingListItem item in allItems)
+            {
+                newVacation.PackingList.Add(item);
+            }
+
+            //newVacation.PackingList = lvPackingList.Items;
+
+            //newVacation.PackingList.AddPackingListItem();
+
 
             UserManager.signedInUser?.Travels.Add(newVacation);
 
@@ -125,6 +148,11 @@ namespace TravelPal.Windows
             TravelsWindow travelsWindow = new();
             travelsWindow.Show();
             Close();
+        }
+
+        private void AddPackingListItem(PackingListItem item)
+        {
+            allItems.Add(item);
         }
 
         public void LoadCountries()
@@ -158,31 +186,37 @@ namespace TravelPal.Windows
             if (cbTravelDocument.IsChecked == true)
             {
                 TravelDocument travelDocument = new();
+                //travelDocument.Name = 
 
             }
             else
             {
-                OtherItem item = new();
-                item.Name = txtItem.Text;
-                item.Quantity = int.Parse(txtItemQuantity.Text);
+                OtherItem otherItem = new();
+                otherItem.Name = txtItem.Text;
+                otherItem.Quantity = int.Parse(txtItemQuantity.Text);
 
+
+                ListViewItem item = new();
+                item.Tag = otherItem;
+                item.Content = otherItem.GetInfo();
+
+                AddPackingListItem(otherItem);
+                lvPackingList.Items.Add(item);
+                
             }
         }
 
         private void cbTravelDocument_Checked(object sender, RoutedEventArgs e)
         {
-            if (cbTravelDocument.IsChecked == true)
-            {
-
-                txtItemQuantity.Visibility = Visibility.Hidden;
-                cbRequired.Visibility = Visibility.Visible;
-
-            }
-            else
-            {
-                txtItemQuantity.Visibility = Visibility.Visible;
-                cbRequired.Visibility = Visibility.Hidden;
-            }
+            txtItemQuantity.Visibility = Visibility.Hidden;
+            cbRequired.Visibility = Visibility.Visible;
+            lblQuantity.Visibility = Visibility.Hidden;
+        }
+        private void cbTravelDocument_Unchecked(object sender, RoutedEventArgs e)
+        {
+            txtItemQuantity.Visibility = Visibility.Visible;
+            cbRequired.Visibility = Visibility.Hidden;
+            lblQuantity.Visibility = Visibility.Visible;
         }
     }
 }

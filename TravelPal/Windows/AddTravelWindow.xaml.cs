@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using TravelPal.Enums;
@@ -53,8 +53,17 @@ namespace TravelPal.Windows
                 {
                     newVacation.AllInclusive = false;
                 }
+                if (txtCity.Text == "")
+                {
+                    MessageBox.Show("Destination can't be empty");
+                }
+                else if (!Regex.IsMatch(txtCity.Text, @"^[a-öA-Ö]+$"))
+                {
+                    MessageBox.Show("Destination can't be a number");
+                }
+
                 // Kolla så alla textrutor och comboboxar inte är tomma
-                if (txtCity.Text != "" && !string.IsNullOrWhiteSpace(txtNumberOfTravelers.Text) && !string.IsNullOrWhiteSpace(txtTravelDays.Text) && cbxCountry.SelectedIndex != -1)
+                else if (!string.IsNullOrWhiteSpace(txtNumberOfTravelers.Text) && !string.IsNullOrWhiteSpace(txtTravelDays.Text) && cbxCountry.SelectedIndex != -1 && cbxVacationType.SelectedIndex != -1)
                 {
                     if (int.TryParse(txtNumberOfTravelers.Text, out int parsedValue) && int.TryParse(txtTravelDays.Text, out int parsedValue2))
                     {
@@ -136,7 +145,7 @@ namespace TravelPal.Windows
         {
             List<PackingListItem> allItems = new();
 
-            foreach(ListViewItem item in lvPackingList.Items)
+            foreach (ListViewItem item in lvPackingList.Items)
             {
                 PackingListItem packingItem = (PackingListItem)item.Tag;
                 allItems.Add(packingItem);
@@ -242,26 +251,52 @@ namespace TravelPal.Windows
 
         private void cbxCountry_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
+            for (int i = 0; i < lvPackingList.Items.Count; i++)
+            {
+                ListViewItem item = new();
+                item = (ListViewItem)lvPackingList.Items[i];
+                if (item.ToString().Contains("Passport") || item.ToString().Contains("passport"))
+                {
+                    lvPackingList.Items.RemoveAt(i);
+                }
+            }
 
+            Country userCountry = UserManager.signedInUser.Country;
+            Country destinationCountry = (Country)cbxCountry.SelectedItem;
+
+            if (userCountry == destinationCountry)
+            {
+                TravelDocument passport = new();
+                passport.Name = "Passport";
+                passport.Required = false;
+
+                ListViewItem item = new();
+                item.Tag = passport;
+                item.Content = passport.GetInfo();
+
+                lvPackingList.Items.Add(item);
+                return;
+            }
 
             bool isEuropeanCountry = false;
             bool isEuropeanUser = false;
 
-            if(cbxCountry.SelectedIndex != -1)
+            if (cbxCountry.SelectedIndex != -1)
             {
-                foreach (Country europeanCountry in Enum.GetValues(typeof(EuropeanCountry)))
+                // Kollar om vi bor i EU
+                foreach (EuropeanCountry europeanCountry in Enum.GetValues(typeof(EuropeanCountry)))
                 {
-                    if (UserManager.signedInUser?.Country == europeanCountry)
+                    if (UserManager.signedInUser?.Country.ToString() == europeanCountry.ToString())
                     {
                         isEuropeanUser = true;
                     }
 
                 }
 
-                foreach (Country thisCountry in Enum.GetValues(typeof(EuropeanCountry)))
+
+                foreach (EuropeanCountry europeanCountry in Enum.GetValues(typeof(EuropeanCountry)))
                 {
-                    if ((Country)cbxCountry.SelectedItem == thisCountry)
+                    if (cbxCountry.SelectedItem.ToString() == europeanCountry.ToString())
                     {
                         isEuropeanCountry = true;
                     }
@@ -270,7 +305,7 @@ namespace TravelPal.Windows
 
 
 
-                if(isEuropeanCountry && isEuropeanUser)
+                if (isEuropeanCountry && isEuropeanUser)
                 {
                     TravelDocument passport = new();
                     passport.Name = "Passport";
@@ -282,8 +317,19 @@ namespace TravelPal.Windows
 
                     lvPackingList.Items.Add(item);
                 }
+                //else if(!isEuropeanUser && isEuropeanCountry)
+                //{
+                //    TravelDocument passport = new();
+                //    passport.Name = "Passport";
+                //    passport.Required = true;
 
-                else if(!isEuropeanCountry && isEuropeanUser)
+                //    ListViewItem item = new();
+                //    item.Tag = passport;
+                //    item.Content = passport.GetInfo();
+
+                //    lvPackingList.Items.Add(item);
+                //}
+                else if (!isEuropeanCountry && isEuropeanUser)
                 {
                     TravelDocument passport = new();
                     passport.Name = "Passport";
@@ -295,7 +341,7 @@ namespace TravelPal.Windows
 
                     lvPackingList.Items.Add(item);
                 }
-                else if (!isEuropeanCountry)
+                else if (!isEuropeanCountry || !isEuropeanUser)
                 {
                     TravelDocument passport = new();
                     passport.Name = "Passport";
@@ -310,7 +356,7 @@ namespace TravelPal.Windows
             }
 
 
-            
+
 
 
             //if (UserManager.signedInUser?.Country.GetType() == typeof(Country))

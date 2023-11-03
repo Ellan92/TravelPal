@@ -5,7 +5,7 @@ namespace TravelPal.Managers
 {
     public static class TravelManager
     {
-        
+
         public static void removeTravel(Travel travel)
         {
             if (UserManager.signedInUser.GetType() == typeof(User))

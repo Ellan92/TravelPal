@@ -39,7 +39,7 @@ namespace TravelPal
                     UserManager.RegisterUser(username, password, country);
 
                     // Messagebox - Welcome
-                    MessageBox.Show("Welcome to TravelPal, you may now log in.");
+                    MessageBox.Show("Welcome to TravelPal, you may now log in.", "Success!");
 
                     // Öppna MainWindow
                     // TODO: Skicka med user

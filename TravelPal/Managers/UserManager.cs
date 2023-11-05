@@ -17,12 +17,15 @@ namespace TravelPal.Managers
 
             new Vacation ("New York", Country.USA, 4, 14, true, items: 
                 new List<PackingListItem> { 
-                new OtherItem { Name = "Flip-flops", Quantity = 2} }),
+                new OtherItem { Name = "Flip-flops", Quantity = 2},
+                new TravelDocument{ Name = "Passport", Required = false } }),
+
 
             new WorkTrip ("Stockholm", Country.Sweden, 2, 3, "Meeting at 17:30", items:
                 new List<PackingListItem>
                 {
-                    new OtherItem { Name = "Breifcase", Quantity = 1}
+                    new OtherItem { Name = "Breifcase", Quantity = 1},
+                    new TravelDocument { Name = "Passport", Required = true },
                 }) }
         },
             new Admin("admin", "password", Country.Sweden)

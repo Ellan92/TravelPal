@@ -25,8 +25,6 @@ namespace TravelPal.Windows
             cbxVacationType.Items.Add("Vacation");
             cbxVacationType.Items.Add("Work trip");
 
-
-
         }
 
         private void GoBack_Click(object sender, RoutedEventArgs e)
@@ -38,6 +36,12 @@ namespace TravelPal.Windows
 
         private void btnSaveTravel_Click(object sender, RoutedEventArgs e)
         {
+            //Kolla så alla textrutor och comboboxar inte är tomma
+            if (cbxVacationType.SelectedIndex == -1)
+            {
+                MessageBox.Show("Please select vacation type.", "Warning");
+            }
+            else
 
             // Kolla om resan är en vacation
             if (cbxVacationType.SelectedIndex == 0)
@@ -123,15 +127,6 @@ namespace TravelPal.Windows
             newVacation.TravelDays = int.Parse(txtTravelDays.Text);
             newVacation.PackingList = allItems;
 
-
-            //foreach (ListViewItem item in allPackingItems)
-            //{
-            //    newVacation.PackingList.Add((PackingListItem)item.Tag);
-            //}
-
-
-
-
             UserManager.signedInUser?.Travels.Add(newVacation);
 
             MessageBox.Show("Vacation saved!", "Success!");
@@ -157,8 +152,6 @@ namespace TravelPal.Windows
             workTrip.TravelDays = int.Parse(txtTravelDays.Text);
             workTrip.MeetingDetails = txtMeetingDetails.Text;
             workTrip.PackingList = allItems;
-
-            //TODO: Om Travelers eller TravelDays inte är siffra så crashar programmet
 
             UserManager.signedInUser?.Travels.Add(workTrip);
 
@@ -217,15 +210,12 @@ namespace TravelPal.Windows
 
                 lvPackingList.Items.Add(item);
 
-                //travelDocument.Name = 
-
             }
             else
             {
                 OtherItem otherItem = new();
                 otherItem.Name = txtItem.Text;
                 otherItem.Quantity = int.Parse(txtItemQuantity.Text);
-
 
                 ListViewItem item = new();
                 item.Tag = otherItem;
@@ -293,7 +283,6 @@ namespace TravelPal.Windows
 
                 }
 
-
                 foreach (EuropeanCountry europeanCountry in Enum.GetValues(typeof(EuropeanCountry)))
                 {
                     if (cbxCountry.SelectedItem.ToString() == europeanCountry.ToString())
@@ -301,9 +290,6 @@ namespace TravelPal.Windows
                         isEuropeanCountry = true;
                     }
                 }
-
-
-
 
                 if (isEuropeanCountry && isEuropeanUser)
                 {
@@ -317,18 +303,7 @@ namespace TravelPal.Windows
 
                     lvPackingList.Items.Add(item);
                 }
-                //else if(!isEuropeanUser && isEuropeanCountry)
-                //{
-                //    TravelDocument passport = new();
-                //    passport.Name = "Passport";
-                //    passport.Required = true;
 
-                //    ListViewItem item = new();
-                //    item.Tag = passport;
-                //    item.Content = passport.GetInfo();
-
-                //    lvPackingList.Items.Add(item);
-                //}
                 else if (!isEuropeanCountry && isEuropeanUser)
                 {
                     TravelDocument passport = new();
@@ -354,23 +329,6 @@ namespace TravelPal.Windows
                     lvPackingList.Items.Add(item);
                 }
             }
-
-
-
-
-
-            //if (UserManager.signedInUser?.Country.GetType() == typeof(Country))
-            //{
-            //    TravelDocument passport = new();
-            //    passport.Name = "Passport";
-            //    passport.Required = true;
-
-            //    ListViewItem item = new();
-            //    item.Tag = passport;
-            //    item.Content = passport.GetInfo();
-
-            //    lvPackingList.Items.Add(item);
-            //}
         }
     }
 }

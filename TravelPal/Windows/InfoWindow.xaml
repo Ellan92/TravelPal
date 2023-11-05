@@ -55,7 +55,7 @@
             Grid.ColumnSpan="2"
             Background="Transparent"
             VerticalContentAlignment="Center"
-            Text="TravelPal inc. is an company that has revolutionized the travel experience since 1978. The name 'Pal' comes from the initials of the founder Pedro Aaron Lewis. Pedro tragically passed away in 2023 resulting in the role of VD being passed on to Elias Jarlsfelt."
+            Text="TravelPal inc. is a company that has revolutionized the travel experience since 1978. The name 'Pal' comes from the initials of the founder Pedro Aaron Lewis. Pedro tragically passed away in 2023 resulting in the role of VD being passed on to Elias Jarlsfelt."
             TextWrapping="Wrap"
             Foreground="MediumSlateBlue"
             FontFamily="Arial"
